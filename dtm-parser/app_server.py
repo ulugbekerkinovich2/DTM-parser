@@ -7,30 +7,23 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium_stealth import stealth
 import time
-
-from selenium import webdriver
-from selenium_stealth import stealth
-import time
-
-options = webdriver.ChromeOptions()
-options.add_argument("--headless")
-options.add_argument("--no-sandbox")
-options.add_argument("--disable-gpu")
-options.add_argument("--disable-dev-shm-usage")
-options.add_argument("start-maximized")  # Maksimal hajmga kengaytirish
-
-options.add_experimental_option("excludeSwitches", ["enable-automation"])
-options.add_experimental_option('useAutomationExtension', False)
-
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
-# Chrome uchun sozlamalarni o'rnatish
 options = Options()
-options.add_argument("--headless")  # Agar headless rejimda ishlash kerak bo'lsa
-options.add_argument("--no-sandbox")
-options.add_argument("--disable-dev-shm-usage")
+options.add_argument("--headless")  # Grafik interfeysisiz ishlash
+options.add_argument("--no-sandbox")  # Sandbox xavfsizlik cheklovini o'chirish
+options.add_argument("--disable-gpu")  # GPU acceleratsiyasini o'chirish
+options.add_argument("--disable-dev-shm-usage")  # /dev/shm foydalanishni cheklash
+options.add_argument("--remote-debugging-port=9222")  # Remote debugging portni o'rnatish
+
+# ChromeDriver uchun service ob'ektini yaratish
+s = Service('/usr/bin/chromedriver')
+
+# WebDriver ob'ektini yaratish
+driver = webdriver.Chrome(service=s, options=options)
+
 
 # ChromeDriver uchun service ob'ektini yaratish
 s = Service('/chromedriver')
