@@ -19,17 +19,11 @@ options.add_argument("--disable-dev-shm-usage")  # /dev/shm foydalanishni chekla
 options.add_argument("--remote-debugging-port=9222")  # Remote debugging portni o'rnatish
 
 # ChromeDriver uchun service ob'ektini yaratish
-s = Service('/usr/bin/chromedriver')
-
-# WebDriver ob'ektini yaratish
-driver = webdriver.Chrome(service=s, options=options)
-
-
-# ChromeDriver uchun service ob'ektini yaratish
 s = Service('/chromedriver')
 
 # WebDriver ob'ektini yaratish
 driver = webdriver.Chrome(service=s, options=options)
+
 
 stealth(driver,
         languages=["en-US", "en"],
