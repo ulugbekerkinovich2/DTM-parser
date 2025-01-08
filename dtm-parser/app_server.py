@@ -22,7 +22,21 @@ options.add_argument("start-maximized")  # Maksimal hajmga kengaytirish
 options.add_experimental_option("excludeSwitches", ["enable-automation"])
 options.add_experimental_option('useAutomationExtension', False)
 
-driver = webdriver.Chrome(executable_path='/usr/bin/chromedriver', options=options)
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+
+# Chrome uchun sozlamalarni o'rnatish
+options = Options()
+options.add_argument("--headless")  # Agar headless rejimda ishlash kerak bo'lsa
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
+
+# ChromeDriver uchun service ob'ektini yaratish
+s = Service('/chromedriver')
+
+# WebDriver ob'ektini yaratish
+driver = webdriver.Chrome(service=s, options=options)
 
 stealth(driver,
         languages=["en-US", "en"],
